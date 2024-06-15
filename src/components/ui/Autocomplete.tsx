@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import "./Autocomplete.css";
 
 export interface AutocompleteItem {
@@ -11,6 +12,7 @@ interface AutocompleteProps {
   readonly error?: boolean;
   readonly loading?: boolean;
   readonly items: AutocompleteItem[];
+  readonly handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 function Autocomplete({
@@ -18,6 +20,7 @@ function Autocomplete({
   defaultValue,
   error,
   loading,
+  handleChange,
 }: AutocompleteProps) {
   return (
     <div className="autocomplete-search-box ">
@@ -27,6 +30,7 @@ function Autocomplete({
         type="search"
         placeholder={placeHolder}
         className="search-box"
+        onChange={handleChange}
       />
       <ul className="search-result">
         <li>test</li>
