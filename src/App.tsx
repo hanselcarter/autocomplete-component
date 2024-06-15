@@ -13,7 +13,7 @@ function App() {
   const [searchValue, setValueSearchValue] = useState<string>("");
   const debouncedSearchValue = useDebounce<string>(searchValue);
 
-  const { getCountriesByName, countries, loading } = useGetCountries(10);
+  const { getCountriesByName, countries, loading } = useGetCountries(30);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValueSearchValue(event.target.value.trim());
@@ -30,10 +30,10 @@ function App() {
     const transformedCountries = countries.map((country) => ({
       id: generateId("id"),
       label: country.name.common,
-      flag: country.flag,
+      description: country.flag,
     }));
 
-    //Then, when I tested countries api sometimes it does not match the whole list in search keyword, this is an extra layer
+    //Then, when I tested countries api sometimes it does not match the whole list by search keyword, this is an extra layer
     //to make sure it contain search keyword
     return transformedCountries.filter((country) =>
       country.label

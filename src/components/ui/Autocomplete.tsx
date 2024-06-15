@@ -5,7 +5,7 @@ import HighLighter from "./HighLighter";
 export interface AutocompleteItem {
   readonly id: string;
   readonly label: string;
-  readonly flag?: string;
+  readonly description?: string;
 }
 
 interface AutocompleteProps {
@@ -37,6 +37,7 @@ function Autocomplete({
         placeholder={placeHolder}
         className="search-box"
         onChange={handleChange}
+        autoComplete="off"
       />
       <ul className="search-result">
         {startSearchAtMessageError ? (
@@ -54,7 +55,7 @@ function Autocomplete({
                   highlight={highlight}
                   className="highlight"
                 />
-                <span className="flag">{item.flag}</span>
+                <span className="description">{item.description}</span>
               </li>
             ))}
           </>
