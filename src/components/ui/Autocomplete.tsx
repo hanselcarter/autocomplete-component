@@ -2,28 +2,28 @@ import { ChangeEvent } from "react";
 import "./Autocomplete.css";
 
 export interface AutocompleteItem {
-  id: string;
-  label: string;
+  readonly id: string;
+  readonly label: string;
+  readonly flag?: string;
 }
 
 interface AutocompleteProps {
   readonly placeHolder: string;
   readonly defaultValue?: string;
-  readonly error?: boolean;
   readonly loading?: boolean;
   readonly items: AutocompleteItem[];
   readonly handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  //If present this prop is because search wont be allowed, added this logic due to api restriction also for optimzation purposes
+  //If present this prop, search wont be allowed, added this logic due to api restriction also for optimzation purposes
   readonly startSearchAtMessageError?: string;
 }
 
 function Autocomplete({
   placeHolder,
   defaultValue,
-  error,
   loading,
   handleChange,
   startSearchAtMessageError,
+  items,
 }: AutocompleteProps) {
   return (
     <div className="autocomplete-search-box ">
@@ -38,12 +38,14 @@ function Autocomplete({
       <ul className="search-result">
         {startSearchAtMessageError ? (
           <li>{startSearchAtMessageError}</li>
-        ) : (
+        ) : items.length > 0 ? (
           <>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
+            {items.map((item) => (
+              <li key={item.id}>{item.label}</li>
+            ))}
           </>
+        ) : (
+          <li>No countries found.</li>
         )}
       </ul>
     </div>

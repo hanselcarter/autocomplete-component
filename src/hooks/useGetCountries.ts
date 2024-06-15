@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { searchCountryApi } from "../utils/utils";
+import { Country } from "../models/country";
 
-export const useGetCountries = () => {
-  const [loading, setLoading] = useState(true);
-  const [fetchError, setFetchError] = useState(true);
+export const useGetCountries = (
+  //This is parameter to use limit the returned items from country list
+  first: number
+) => {
+  const [loading, setLoading] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
+  const [countriesData, setCountriesData] = useState<Country[]>([]);
 
   const getCountriesByName = async (name: string) => {
     setLoading(true);
@@ -12,17 +17,23 @@ export const useGetCountries = () => {
     try {
       const response = await fetch(`${searchCountryApi}/name/${name}`);
 
-      const data = await response.json();
+      if (response.status === 200) {
+        const data = await response.json();
 
-      console.log(data, "data");
+        setCountriesData(data as Country[]);
+      } else {
+        setCountriesData([]);
+      }
     } catch (error) {
-      console.log(error);
-
       setFetchError(true);
+      setCountriesData([]);
     }
   };
 
+  const slicedCountries = countriesData.slice(0, first);
+
   return {
+    countries: slicedCountries,
     getCountriesByName,
     loading,
     error: fetchError,
