@@ -41,4 +41,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## How to use autocomplete
 
-Start by typing at least one character, once you start your country search a debounced search will for a public countries api for the autocomplete, included loaders and error handling and beautiful ui/ux
+Start by typing at least one character, once you start your country search a debounced search will start for a public countries api, autcomplete will get filled with response higlighting matching text, included loaders and error handling and beautiful ui/ux.
