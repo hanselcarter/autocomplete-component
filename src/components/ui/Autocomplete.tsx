@@ -17,6 +17,7 @@ interface AutocompleteProps {
   //If present this prop, search wont be allowed, added this logic due to api restriction also for optimzation purposes
   readonly startSearchAtMessageError?: string;
   readonly highlight: string;
+  readonly autoFocus?: boolean;
 }
 
 function Autocomplete({
@@ -27,10 +28,12 @@ function Autocomplete({
   startSearchAtMessageError,
   items,
   highlight,
+  autoFocus,
 }: AutocompleteProps) {
   return (
     <div className="autocomplete-search-box ">
       <input
+        autoFocus={autoFocus}
         defaultValue={defaultValue}
         id="input-Autocomplete"
         type="search"

@@ -63,6 +63,7 @@ function App() {
         }
         loading={loading}
         highlight={debouncedSearchValue}
+        autoFocus={true}
       />
     </div>
   );
