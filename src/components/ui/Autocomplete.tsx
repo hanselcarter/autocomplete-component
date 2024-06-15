@@ -13,6 +13,8 @@ interface AutocompleteProps {
   readonly loading?: boolean;
   readonly items: AutocompleteItem[];
   readonly handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  //If present this prop is because search wont be allowed, added this logic due to api restriction also for optimzation purposes
+  readonly startSearchAtMessageError?: string;
 }
 
 function Autocomplete({
@@ -21,6 +23,7 @@ function Autocomplete({
   error,
   loading,
   handleChange,
+  startSearchAtMessageError,
 }: AutocompleteProps) {
   return (
     <div className="autocomplete-search-box ">
@@ -33,9 +36,15 @@ function Autocomplete({
         onChange={handleChange}
       />
       <ul className="search-result">
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
+        {startSearchAtMessageError ? (
+          <li>{startSearchAtMessageError}</li>
+        ) : (
+          <>
+            <li>test</li>
+            <li>test</li>
+            <li>test</li>
+          </>
+        )}
       </ul>
     </div>
   );

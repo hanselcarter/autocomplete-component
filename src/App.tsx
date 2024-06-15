@@ -4,18 +4,28 @@ import Autocomplete from "./components/ui/Autocomplete";
 import "./App.css";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useDebounce } from "./hooks/useDebounce";
+import { useGetCountries } from "./hooks/useGetCountries";
 
 function App() {
-  const [value, setValue] = useState<string>("");
-  const debouncedValue = useDebounce<string>(value);
+  const [searchValue, setValueSearchValue] = useState<string>("");
+  const debouncedSearchValue = useDebounce<string>(searchValue);
+
+  const { getCountriesByName, loading, error } = useGetCountries();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    setValueSearchValue(event.target.value);
   };
 
   useEffect(() => {
-    console.log(debouncedValue, "debouncedValue");
-  }, [debouncedValue]);
+    if (debouncedSearchValue.length >= 2) {
+      getCountriesByName(debouncedSearchValue);
+    }
+  }, [debouncedSearchValue]);
+
+  const allowSearch = debouncedSearchValue.length >= 2;
+  //Added this condtion due to api restriction
+  const startSearchAtMessageError =
+    "Type at least 2 characters to start your country search.";
 
   return (
     <div className="App">
@@ -29,6 +39,9 @@ function App() {
         placeHolder="Find a country ..."
         items={[]}
         handleChange={handleChange}
+        startSearchAtMessageError={
+          allowSearch ? undefined : startSearchAtMessageError
+        }
       />
     </div>
   );

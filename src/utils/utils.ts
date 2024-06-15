@@ -1,1 +1,1 @@
-export const searchCountryApi = "https://restcountries.com/v3.1/";
+export const searchCountryApi = "https://restcountries.com/v3.1";
