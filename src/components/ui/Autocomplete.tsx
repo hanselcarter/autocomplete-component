@@ -14,10 +14,10 @@ interface AutocompleteProps {
   readonly loading?: boolean;
   readonly items: AutocompleteItem[];
   readonly handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  //If present this prop, search wont be allowed, added this logic due to api restriction also for optimzation purposes
-  readonly startSearchAtMessageError?: string;
   readonly highlight: string;
   readonly autoFocus?: boolean;
+  //If present this prop, search wont be allowed, added this logic due to api restriction also for optimzation purposes
+  readonly startSearchAtMessageError?: string;
 }
 
 function Autocomplete({
