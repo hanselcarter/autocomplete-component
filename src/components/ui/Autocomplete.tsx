@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
-import "./Autocomplete.css";
+import "./ui.css";
+import HighLighter from "./HighLighter";
 
 export interface AutocompleteItem {
   readonly id: string;
@@ -15,6 +16,7 @@ interface AutocompleteProps {
   readonly handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   //If present this prop, search wont be allowed, added this logic due to api restriction also for optimzation purposes
   readonly startSearchAtMessageError?: string;
+  readonly highlight: string;
 }
 
 function Autocomplete({
@@ -24,6 +26,7 @@ function Autocomplete({
   handleChange,
   startSearchAtMessageError,
   items,
+  highlight,
 }: AutocompleteProps) {
   return (
     <div className="autocomplete-search-box ">
@@ -38,10 +41,21 @@ function Autocomplete({
       <ul className="search-result">
         {startSearchAtMessageError ? (
           <li>{startSearchAtMessageError}</li>
+        ) : loading ? (
+          <li>
+            <div className="loader"></div>
+          </li>
         ) : items.length > 0 ? (
           <>
             {items.map((item) => (
-              <li key={item.id}>{item.label}</li>
+              <li key={item.id}>
+                <HighLighter
+                  text={item.label}
+                  highlight={highlight}
+                  className="highlight"
+                />
+                <span className="flag">{item.flag}</span>
+              </li>
             ))}
           </>
         ) : (

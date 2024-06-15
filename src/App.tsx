@@ -7,6 +7,8 @@ import { useDebounce } from "./hooks/useDebounce";
 import { useGetCountries } from "./hooks/useGetCountries";
 import { generateId } from "./utils/utils";
 
+const searchRestrictionLenght = 1;
+
 function App() {
   const [searchValue, setValueSearchValue] = useState<string>("");
   const debouncedSearchValue = useDebounce<string>(searchValue);
@@ -14,11 +16,11 @@ function App() {
   const { getCountriesByName, countries, loading } = useGetCountries(10);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValueSearchValue(event.target.value);
+    setValueSearchValue(event.target.value.trim());
   };
 
   useEffect(() => {
-    if (debouncedSearchValue.length >= 2) {
+    if (debouncedSearchValue.length >= searchRestrictionLenght) {
       getCountriesByName(debouncedSearchValue.toLocaleLowerCase());
     }
   }, [debouncedSearchValue]);
@@ -40,10 +42,9 @@ function App() {
     );
   }, [countries]);
 
-  const allowSearch = debouncedSearchValue.length >= 2;
+  const allowSearch = debouncedSearchValue.length >= searchRestrictionLenght;
   //Added this condtion due to api restriction
-  const startSearchAtMessageError =
-    "Type at least 2 characters to start your country search.";
+  const startSearchAtMessageError = `Type at least ${searchRestrictionLenght} characters to start your country search.`;
 
   return (
     <div className="App">
@@ -61,6 +62,7 @@ function App() {
           allowSearch ? undefined : startSearchAtMessageError
         }
         loading={loading}
+        highlight={debouncedSearchValue}
       />
     </div>
   );

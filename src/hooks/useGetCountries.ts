@@ -28,6 +28,8 @@ export const useGetCountries = (
       setFetchError(true);
       setCountriesData([]);
     }
+
+    setLoading(false);
   };
 
   const slicedCountries = countriesData.slice(0, first);
