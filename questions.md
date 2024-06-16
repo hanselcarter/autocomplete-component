@@ -33,8 +33,7 @@ const ChildComponent = forwardRef((props, ref) => {
 4. Give 2 ways to prevent components from re-rendering.
 
    R:/ First will be the most commonly used on my end is by using the useMemo hook, what use memo do is that memoizes a values by passing a dependency array making sure value gets calculated only if dependecies changes, this is usefull on expensive callation/complex logic thus reducing unnecessary computations and rendering updates.
-   Second will be the most commonly used on my end is by using the useMemo hook use memo checks, it basically memoizes a values by passing a dependency array making sure value gets calculated only if dependecies changes, this is usefull on expensive callation/complex logic thus reducing unnecessary computations and rendering updates.
-   second one is another classic which I have used a lot too is useCallback which basically memoizes callback functions based on their dependencies to prevent rerenders of child components that receive the callbacks as props.
+   Second one is another classic which I have used a lot too is useCallback which basically memoizes callback functions based on their dependencies to prevent rerenders of child components that receive the callbacks as props.
 
    These two are lifesavers when it comes to performace issues inside expensive components.
 
