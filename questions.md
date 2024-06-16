@@ -41,12 +41,14 @@ const ChildComponent = forwardRef((props, ref) => {
 
    R:/Fragment is a way to making sure you have a parent element in a group of elements without the neccesaty of adding extra nodes for example a div, divs might have some styling that you might not even need so Fragment allows to return this grouped elements without any hastle also JSX elements need to have a parent node, if you do not add a fragement for example
 
-   ```return <h1>Hello world</h1>
-                <p>Description</p>
-   ```
+```return (
 
-   Code bove will throw an error
-   but if you change it to
+   <h1>Hello world</h1>
+   <p>Description</p>
+
+   ) This Code bove will throw an error
+  but if you change it to
+```
 
 ```return (
     <>
