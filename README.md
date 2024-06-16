@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## How to run app
 
-In the project directory run in order:
+In the project directory run in order (Make sure you have at least node 18 on your machine):
 
 ### `npm install`
 
