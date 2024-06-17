@@ -12,7 +12,7 @@ First thing you need to install packages, run "npm install" on your terminal bef
 
 ### `npm start`
 
-The nRun the app in the development mode by running on your terminal "npm install" .\
+To run the app in the development mode by running on your terminal "npm start" .\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
